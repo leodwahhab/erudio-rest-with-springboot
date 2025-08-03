@@ -9,6 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                 // que precisam ser carregados na inicialização do programa
 public class WebConfig implements WebMvcConfigurer {
 
+    public static final String APPLICATION_YAML_VALUE = "application/yaml";
+    public static final MediaType APPLICATION_YAML = MediaType.valueOf(APPLICATION_YAML_VALUE);
+
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
     // via queryParam
@@ -26,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .useRegisteredExtensionsOnly(false)
                 .defaultContentType(MediaType.APPLICATION_JSON)
                 .mediaType("json", MediaType.APPLICATION_JSON)
-                .mediaType("xml", MediaType.APPLICATION_XML);
+                .mediaType("xml", MediaType.APPLICATION_XML)
+                .mediaType("yaml", APPLICATION_YAML);
     }
 }

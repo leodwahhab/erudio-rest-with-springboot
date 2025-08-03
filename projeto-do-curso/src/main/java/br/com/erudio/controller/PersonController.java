@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.erudio.data.vo.v1.PersonVO;
 import br.com.erudio.services.PersonServices;
 
+import static br.com.erudio.config.WebConfig.APPLICATION_YAML;
+import static br.com.erudio.config.WebConfig.APPLICATION_YAML_VALUE;
+
 @RestController
 @RequestMapping("/person/v1")
 public class PersonController {
@@ -24,36 +27,54 @@ public class PersonController {
 	@Autowired
 	private PersonServices service;
 	
-	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(produces = {
+			MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE,
+			APPLICATION_YAML_VALUE
+	})
 	public List<PersonVO> findAll() {
 		return service.findAll();
 	}	
 
-	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(value = "/{id}", produces = {
+			MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE,
+			APPLICATION_YAML_VALUE
+	})
 	public PersonVO findById(@PathVariable("id") Long id) {
 		return service.findById(id);
 	}	
 	
 	@PostMapping(
 			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, // diz que o endpoint recebe tanto json quando xml
-			produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }  // e retorna tanto json quanto xml
-	)
+			produces = {
+					MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE,
+					APPLICATION_YAML_VALUE
+			})
 	public PersonVO create(@RequestBody PersonVO person) {
 		return service.create(person);
 	}
 	
 	@PutMapping(
 			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
-			produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }
-	)
+			produces = {
+					MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE,
+					APPLICATION_YAML_VALUE
+			})
 	public PersonVO update(@RequestBody PersonVO person) {
 		return service.update(person);
 	}	
 	
-	@DeleteMapping(value = "/{id}",
+	@DeleteMapping(
+			value = "/{id}",
 			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
-			produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }
-	)
+			produces = {
+					MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE,
+					APPLICATION_YAML_VALUE
+			})
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		service.delete(id);
 		return ResponseEntity.ok().build();
