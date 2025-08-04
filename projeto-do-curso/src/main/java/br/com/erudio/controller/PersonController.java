@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.erudio.data.vo.v1.PersonVO;
 import br.com.erudio.services.PersonServices;
 
-import static br.com.erudio.config.WebConfig.APPLICATION_YAML;
 import static br.com.erudio.config.WebConfig.APPLICATION_YAML_VALUE;
 
 @RestController

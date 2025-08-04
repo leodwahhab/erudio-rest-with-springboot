@@ -1,8 +1,10 @@
 package br.com.erudio.data.vo.v1;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 
-public class PersonVO implements Serializable{
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
