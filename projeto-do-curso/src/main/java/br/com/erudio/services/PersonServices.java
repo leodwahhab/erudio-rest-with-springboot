@@ -1,9 +1,12 @@
 package br.com.erudio.services;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.com.erudio.controller.PersonController;
+import br.com.erudio.exception.RequiredObjectIsNullException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,7 @@ public class PersonServices {
 	PersonRepository repository;
 		
 	public PersonVO create(PersonVO person) {
+		if (Objects.isNull(person)) throw new RequiredObjectIsNullException();
 		var entity = DozerConverter.parseObject(person, Person.class);
 		return createVoWithHateoasLinks(DozerConverter.parseObject(repository.save(entity), PersonVO.class));
 	}
@@ -41,6 +45,8 @@ public class PersonServices {
 	}
 
 	public PersonVO update(PersonVO person) {
+		if (Objects.isNull(person)) throw new RequiredObjectIsNullException();
+
 		var entity = repository.findById(person.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 		
